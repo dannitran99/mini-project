@@ -1,0 +1,56 @@
+.navmenu {
+  border-style:none none solid none;
+  border-width:thin;
+  border-color: #bfbfbf;
+  position:fixed;
+  display: flex;
+  justify-content: space-between;
+  align-items:center;
+  width:100%;
+  height: 70px;
+  .menu{
+    height:100%;
+  }
+}
+
+.leftmenu {
+    display: flex;
+    height: 100%;
+}
+
+.applogo{
+    height: 50px;
+}
+
+.navlogo {
+    background-color:black;
+    height:100%;
+    padding:1em;
+    border: none;
+}
+
+.navsearch {
+    background-color: #d5d73a;
+    height:100%;
+    width: 80px;
+    padding:1em;
+    border: none;
+}
+
+.navbutton {
+  background-color:white;
+  height:100%;
+  width: 80px;
+  padding:1em;
+  border-style:none solid none none;
+  border-width:thin;
+  border-color: #bfbfbf;
+}
+
+a{
+  text-decoration: none;
+}
+
+a:visited{
+  color:black;
+}
