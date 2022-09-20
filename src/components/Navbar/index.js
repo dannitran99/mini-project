@@ -6,9 +6,8 @@ import { useAuth0 } from "@auth0/auth0-react";
 import logo from '../../logo.svg';
 import './styles.scss';
 
-
 function Navbar() {
-  const { loginWithRedirect } = useAuth0();
+  const { loginWithRedirect, isAuthenticated ,user, logout } = useAuth0();
   return (
     <div className="navmenu">
       <div className="leftmenu">
@@ -26,16 +25,35 @@ function Navbar() {
           </button>
         </div>
       </div>
-      <div className="menu">
-        <button className="navbutton">
-          Cart
-        </button>
-        <button className="navbutton">
-          VN
-        </button>
-        <button className="navbutton" onClick={() => loginWithRedirect()}>
-          Login
-        </button>
+      <div className="leftmenu">
+        <div className="menu">
+          <button className="navbutton">
+            Cart
+          </button>
+          <button className="navbutton">
+            VN
+          </button>
+        </div>
+        <div className="menu">
+          {isAuthenticated ? (
+            <>
+              <button className="user-menu">
+                <img src={user.picture} className="avt"/>
+                <div className="sub-menu">
+                  <ul>
+                    <li>Information</li>
+                    <br/>
+                    <li><a href='#' onClick={() => logout({ returnTo: window.location.origin })}>Logout</a></li>
+                  </ul>
+                </div>
+              </button>
+              
+            </>
+          ):(
+            <button className="navbutton" onClick={() => loginWithRedirect()}>
+              Login
+            </button>)}
+         </div>
       </div>
     </div>
   );
