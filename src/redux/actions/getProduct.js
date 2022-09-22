@@ -40,14 +40,15 @@ export const getProduct = createSlice({
       state.isLoading = true;
     });
 
-    // Khi thực hiện action login thành công (Promise fulfilled)
+    // Khi thực hiện action thành công (Promise fulfilled)
     builder.addCase(getData.fulfilled, (state, action) => {
       // Tắt trạng thái loading, lưu thông tin user vào store
       state.isLoading = false;
       state.data = action.payload;
+      console.log(action.payload);
     });
 
-    // Khi thực hiện action login thất bại (Promise rejected)
+    // Khi thực hiện action thất bại (Promise rejected)
     builder.addCase(getData.rejected, (state, action) => {
       // Tắt trạng thái loading, lưu thông báo lỗi vào store
       state.isLoading = false;
