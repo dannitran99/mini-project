@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
-import {SearchOutlined} from '@ant-design/icons';
+import {SearchOutlined,ShoppingCartOutlined } from '@ant-design/icons';
 import { useAuth0 } from "@auth0/auth0-react";
 import logo from '../../logo.svg';
 import './styles.scss';
@@ -28,10 +28,7 @@ function Navbar() {
       <div className="leftmenu">
         <div className="menu">
           <button className="navbutton">
-            Cart
-          </button>
-          <button className="navbutton">
-            VN
+            <ShoppingCartOutlined style={{ fontSize: '25px', color: '#08c' }}/>
           </button>
         </div>
         <div className="menu">

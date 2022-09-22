@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch,useSelector  } from 'react-redux';
 import { getData } from '../../redux/actions/getProduct';
+import { addToCart } from '../../redux/actions/createCart';
 import Loading from '../../components/Loading';
 import ProductItem from '../../components/ProductItem';
 import './styles.scss';
@@ -11,8 +12,9 @@ import {
 function HomePage() {
   
   const todos = useSelector((state) => state.getProduct);
+  const data = useSelector((state) => state.createCart);
   const dispatch = useDispatch();
-
+  console.log(data.data)
   useEffect(() => {
     dispatch(getData())
   }, []);
@@ -20,7 +22,7 @@ function HomePage() {
   return (
        <div className='content'>
          {todos.isLoading && <Loading/>}
-         <Grid container spacing={3}>
+         <Grid container spacing={1}>
            {todos.data.map((item,index)=>{
             return (
               <Grid
@@ -29,7 +31,7 @@ function HomePage() {
                 xs={12}
                 md={3}
               >
-                <ProductItem data={item}/>
+                <ProductItem data={item} addCart={addToCart}/>
               </Grid>
             );
            })}

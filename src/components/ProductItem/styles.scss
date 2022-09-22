@@ -1,6 +1,65 @@
+.itemComponent{
+    display: flex;
+    flex-direction: row;
+    height:100%;
+    width:100%;
+    position: relative;
+    
+    &:hover {
+        // background-color:#edece8;
+        
+        .cardItem {
+         animation: fadeIn 0.5s;
+         -webkit-animation: fadeIn 0.5s;
+         -moz-animation: fadeIn 0.5s;
+         -o-animation: fadeIn 0.5s;
+         -ms-animation: fadeIn 0.5s;  
+          display:block;
+        }
+      }
+}
+
 .item{
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2em;
+    background-color: white;
 }
 
 .imgProduct{
     height: 150px;
 }
+
+.cardItem{
+    
+    z-index: 1;
+    position: absolute;
+    display: none;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  
+  @-moz-keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  
+  @-webkit-keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  
+  @-o-keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  
+  @-ms-keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }

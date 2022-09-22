@@ -58,7 +58,7 @@ export const getProduct = createSlice({
 });
 
 // this is for dispatch
-export const { loadData } = getProduct.actions;
+// export const { loadData } = getProduct.actions;
 
 // this is for configureStore
 export default getProduct.reducer;
