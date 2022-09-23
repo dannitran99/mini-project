@@ -12,9 +12,7 @@ import {
 function HomePage() {
   
   const todos = useSelector((state) => state.getProduct);
-  const data = useSelector((state) => state.createCart);
   const dispatch = useDispatch();
-  console.log(data.data)
   useEffect(() => {
     dispatch(getData())
   }, []);

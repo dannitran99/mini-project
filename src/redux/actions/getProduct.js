@@ -45,7 +45,6 @@ export const getProduct = createSlice({
       // Tắt trạng thái loading, lưu thông tin user vào store
       state.isLoading = false;
       state.data = action.payload;
-      console.log(action.payload);
     });
 
     // Khi thực hiện action thất bại (Promise rejected)

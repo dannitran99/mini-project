@@ -1,12 +1,14 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
-import messages from './messages';
+import {useSelector  } from 'react-redux';
 import {SearchOutlined,ShoppingCartOutlined } from '@ant-design/icons';
+import {Badge} from '@material-ui/core';
 import { useAuth0 } from "@auth0/auth0-react";
 import logo from '../../logo.svg';
 import './styles.scss';
 
 function Navbar() {
+
+  const data = useSelector((state) => state.createCart);
   const { loginWithRedirect, isAuthenticated ,user, logout } = useAuth0();
   return (
     <div className="navmenu">
@@ -25,10 +27,12 @@ function Navbar() {
           </button>
         </div>
       </div>
-      <div className="leftmenu">
+      <div className="rightmenu">
         <div className="menu">
           <button className="navbutton">
-            <ShoppingCartOutlined style={{ fontSize: '25px', color: '#08c' }}/>
+            <Badge badgeContent={data.count} color="primary" overlap="rectangular">
+              <ShoppingCartOutlined style={{ fontSize: '25px', color: '#08c' }}/>
+            </Badge>
           </button>
         </div>
         <div className="menu">
