@@ -20,11 +20,29 @@ export const createCart = createSlice({
         state.count++;
         if(notFound) state.data.push({id:action.payload.id, title:action.payload.title, price:action.payload.price,number:1});
     },
+    plusProduct: (state, action) => {
+      state.data.find(element => {
+          if (element.id === action.payload) {
+              element.number++;
+          }
+        });
+      state.count++;
+    },
+    minusProduct: (state, action) => {
+      state.data.find((element,index) => {
+          
+          if (element.id === action.payload) {
+            console.log(element.id)
+            element.number ==1?state.data.splice(index, 1):element.number--;
+          }
+        });
+      state.count--;
+    },
   },
 });
 
 // this is for dispatch
-export const { addToCart } = createCart.actions;
+export const { addToCart,plusProduct,minusProduct } = createCart.actions;
 
 // this is for configureStore
 export default createCart.reducer;

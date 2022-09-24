@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from "react-router-dom";
 import {useSelector  } from 'react-redux';
 import {SearchOutlined,ShoppingCartOutlined } from '@ant-design/icons';
 import {Badge} from '@material-ui/core';
@@ -7,7 +8,7 @@ import logo from '../../logo.svg';
 import './styles.scss';
 
 function Navbar() {
-
+  const navigate = useNavigate();
   const data = useSelector((state) => state.createCart);
   const { loginWithRedirect, isAuthenticated ,user, logout } = useAuth0();
   return (
@@ -29,7 +30,7 @@ function Navbar() {
       </div>
       <div className="rightmenu">
         <div className="menu">
-          <button className="navbutton">
+          <button className="navbutton" onClick={()=>{if(data.count>0)navigate('/cart')}}>
             <Badge badgeContent={data.count} color="primary" overlap="rectangular">
               <ShoppingCartOutlined style={{ fontSize: '25px', color: '#08c' }}/>
             </Badge>
