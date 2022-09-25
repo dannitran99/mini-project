@@ -31,7 +31,6 @@ export const createCart = createSlice({
     minusProduct: (state, action) => {
       state.data.map((element,index) => {
           if (element.id === action.payload) {
-            console.log(element.id,action.payload)
             element.number ==1?state.data.splice(index, 1):element.number--;
           }
         });

@@ -15,7 +15,7 @@ function Navbar() {
     <div className="navmenu">
       <div className="leftmenu">
         <div className="menu">
-          <button className="navlogo">
+          <button className="navlogo" onClick={() => navigate('/')}>
             <img src={logo} className="applogo" alt="logo" />
           </button>
         </div>
@@ -43,7 +43,7 @@ function Navbar() {
                 <img src={user.picture} className="avt"/>
                 <div className="sub-menu">
                   <ul>
-                    <li>Information</li>
+                    <li><a href='#' onClick={() => navigate('/info')}>Information</a></li>
                     <br/>
                     <li><a href='#' onClick={() => logout({ returnTo: window.location.origin })}>Logout</a></li>
                   </ul>

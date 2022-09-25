@@ -10,7 +10,7 @@ import './styles.scss';
 export default function CustomizedTables(props) {
   const dispatch = useDispatch();
   return (
-    <TableContainer component={Paper}>
+    <TableContainer component={Paper}style={{ width: "90%" }}>
       <Table className='table' >
         <TableHead>
           <TableRow>
