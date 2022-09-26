@@ -5,43 +5,43 @@ import {SearchOutlined,ShoppingCartOutlined } from '@ant-design/icons';
 import {Badge} from '@material-ui/core';
 import { useAuth0 } from "@auth0/auth0-react";
 import logo from '../../logo.svg';
-import './styles.scss';
+import style from './Navbar.module.scss';
 
 function Navbar() {
   const navigate = useNavigate();
   const data = useSelector((state) => state.createCart);
   const { loginWithRedirect, isAuthenticated ,user, logout } = useAuth0();
   return (
-    <div className="navmenu">
-      <div className="leftmenu">
-        <div className="menu">
-          <button className="navlogo" onClick={() => navigate('/')}>
-            <img src={logo} className="applogo" alt="logo" />
+    <div className={style.navmenu}>
+      <div className={style.leftmenu}>
+        <div className={style.menu}>
+          <button className={style.navlogo} onClick={() => navigate('/')}>
+            <img src={logo} className={style.applogo} alt="logo" />
           </button>
         </div>
-        <div className="menu">
-          <button className="navsearch">
+        <div className={style.menu}>
+          <button className={style.navsearch}>
             <SearchOutlined/>
           </button>
-          <button className="navbutton">
+          <button className={style.navbutton}>
             Category
           </button>
         </div>
       </div>
-      <div className="rightmenu">
-        <div className="menu">
-          <button className="navbutton" onClick={()=>{if(data.count>0)navigate('/cart')}}>
+      <div className={style.rightmenu}>
+        <div className={style.menu}>
+          <button className={style.navbutton} onClick={()=>navigate('/cart')}>
             <Badge badgeContent={data.count} color="primary" overlap="rectangular">
               <ShoppingCartOutlined style={{ fontSize: '25px', color: '#08c' }}/>
             </Badge>
           </button>
         </div>
-        <div className="menu">
+        <div className={style.menu}>
           {isAuthenticated ? (
             <>
-              <button className="user-menu">
-                <img src={user.picture} className="avt"/>
-                <div className="sub-menu">
+              <button className={style.userMenu}>
+                <img src={user.picture} className={style.avt}/>
+                <div className={style.subMenu}>
                   <ul>
                     <li><a href='#' onClick={() => navigate('/info')}>Information</a></li>
                     <br/>
@@ -52,7 +52,7 @@ function Navbar() {
               
             </>
           ):(
-            <button className="navbutton" onClick={() => loginWithRedirect()}>
+            <button className={style.navbutton} onClick={() => loginWithRedirect()}>
               Login
             </button>)}
          </div>
