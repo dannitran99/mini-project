@@ -1,10 +1,10 @@
 import React from 'react';
-import './styles.scss';
+import style from './Loading.module.scss';
 
 function Loading() {
   return (
-    <div className="loading">
-      <div className="loader"></div>
+    <div className={style.loading}>
+      <div className={style.loader}></div>
     </div>
     
   );

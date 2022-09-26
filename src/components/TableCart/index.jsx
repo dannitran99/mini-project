@@ -3,7 +3,7 @@ import {Table,TableBody,TableCell,TableContainer,TableHead,TableRow,IconButton,P
 import {LeftOutlined ,RightOutlined  } from '@ant-design/icons';
 import { useDispatch  } from 'react-redux';
 import { plusProduct,minusProduct } from '../../redux/actions/createCart';
-import './styles.scss';
+import style from './Tablecart.module.scss';
 
 
 
@@ -11,7 +11,7 @@ export default function CustomizedTables(props) {
   const dispatch = useDispatch();
   return (
     <TableContainer component={Paper}style={{ width: "90%" }}>
-      <Table className='table' >
+      <Table  >
         <TableHead>
           <TableRow>
             <TableCell>Product</TableCell>
