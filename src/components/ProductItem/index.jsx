@@ -2,9 +2,11 @@ import React from 'react';
 import {Typography,Card,CardHeader,CardMedia,CardContent,CardActions,IconButton} from '@material-ui/core';
 import {PlusCircleOutlined } from '@ant-design/icons';
 import { useDispatch  } from 'react-redux';
+import { useNavigate } from "react-router-dom";
 import style from './Productitem.module.scss';
 function ProductItem(props) {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const addToCart = () =>{
         dispatch(props.addCart(props.data));
@@ -13,8 +15,9 @@ function ProductItem(props) {
     <div className={style.itemComponent} >
         <div className={style.item}>
             <img className={style.imgProduct} src={props.data.image}/>
-            <div>
+            <div className={style.infodiv}>
                 <Typography>{props.data.title}</Typography>
+                <hr/>
                 <Typography>{props.data.price}$</Typography>
             </div>
         </div>
@@ -28,6 +31,11 @@ function ProductItem(props) {
                 height="194"
                 image={props.data.image}
                 alt={props.data.title}
+                onClick={()=>navigate({
+                    pathname: '/detail-product',
+                    search: `?id=${props.data.id}`
+                  })}
+                style={{cursor:"pointer"}}
             />
             <CardContent>
                 <Typography variant="body2" >

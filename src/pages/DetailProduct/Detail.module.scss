@@ -1,0 +1,20 @@
+.contentDetail{
+    position: absolute;
+    width: 100%;
+    top:100px;
+    padding: 2em;
+ }
+ .image{
+     max-width:100% ;
+     max-height: 500px;
+     object-fit: cover;
+ }
+
+ .priceDiv{
+    display: flex;
+    justify-content: space-between;
+    padding: 0 4em;
+ }
+ .detailProduct{
+    max-width: 600px;
+ }
