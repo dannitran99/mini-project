@@ -21,22 +21,22 @@ export default function CustomizedTables(props) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {props.data.map((row) => (
-            <TableRow key={row.id}>
+          {props.data.map((item) => (
+            <TableRow key={item.id}>
               <TableCell>
-                {row.title}
+                {item.title}
               </TableCell>
-              <TableCell align="right">{row.price}</TableCell>
+              <TableCell align="right">{item.price}</TableCell>
               <TableCell align="right">
-                <IconButton onClick={()=>dispatch(minusProduct(row.id))}>
+                <IconButton onClick={()=>dispatch(minusProduct(item.id))}>
                     <LeftOutlined   />
                 </IconButton>
-                {row.number}
-                <IconButton onClick={()=>dispatch(plusProduct(row.id))}>
+                {item.number}
+                <IconButton onClick={()=>dispatch(plusProduct(item.id))}>
                     <RightOutlined   />
                 </IconButton>
               </TableCell>
-              <TableCell align="right">{row.number*row.price}</TableCell>
+              <TableCell align="right">{item.number*item.price}</TableCell>
             </TableRow>
           ))}
         </TableBody>

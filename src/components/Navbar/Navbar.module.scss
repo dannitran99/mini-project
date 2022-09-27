@@ -34,6 +34,7 @@
     height:100%;
     padding:1em;
     border: none;
+    cursor: pointer;
 }
 
 .navsearch {
@@ -86,6 +87,11 @@ a:visited{
 }
 
 .subMenu{
+  border-style: solid;
+  border-width:thin;
+  border-color: #bfbfbf;
+  width: 80px;
+  background-color: white;
   position:absolute;
   left:0;
   top:100%;

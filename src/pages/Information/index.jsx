@@ -1,10 +1,10 @@
 import { useAuth0 } from "@auth0/auth0-react";
-import './styles.scss';
+import style from './Information.module.scss';
 
 function Information() {
     const {user,isAuthenticated} = useAuth0();
     return (
-        <div className="contentInfo">
+        <div className={style.contentInfo}>
             {isAuthenticated&&(
                 <article>
                     {user?.picture && <img src={user.picture} alt={user?.name}/>}

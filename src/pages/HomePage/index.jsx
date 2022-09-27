@@ -4,7 +4,7 @@ import { getData } from '../../redux/actions/getProduct';
 import { addToCart } from '../../redux/actions/createCart';
 import Loading from '../../components/Loading';
 import ProductItem from '../../components/ProductItem';
-import './styles.scss';
+import style from './Home.module.scss';
 import {
   Grid
 } from "@material-ui/core";
@@ -18,7 +18,7 @@ function HomePage() {
   }, []);
 
   return (
-       <div className='content'>
+       <div className={style.content}>
          {todos.isLoading && <Loading/>}
          <Grid container spacing={1}>
            {todos.data.map((item,index)=>{
