@@ -1,15 +1,23 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
-import {useSelector  } from 'react-redux';
+import {useSelector ,useDispatch } from 'react-redux';
 import {SearchOutlined,ShoppingCartOutlined } from '@ant-design/icons';
-import {Badge} from '@material-ui/core';
+import {Badge,TextField} from '@material-ui/core';
 import { useAuth0 } from "@auth0/auth0-react";
+import { getData } from '../../redux/actions/getProduct';
 import logo from '../../logo.svg';
 import style from './Navbar.module.scss';
 
 function Navbar() {
   const navigate = useNavigate();
   const data = useSelector((state) => state.createCart);
+  const todos = useSelector((state) => state.getProduct);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getData())
+  }, []);
+
   const { loginWithRedirect, isAuthenticated ,user, logout } = useAuth0();
   return (
     <div className={style.navmenu}>
@@ -22,9 +30,29 @@ function Navbar() {
         <div className={style.menu}>
           <button className={style.navsearch}>
             <SearchOutlined/>
+            <div className={style.textboxsearch}>
+              <TextField label="Search..." />
+            </div>
           </button>
-          <button className={style.navbutton}>
+        </div>
+        <div className={style.menu}>
+          <button className={style.buttonHoverDropdown}>
             Category
+            <div className={style.subMenu}>
+              <ul>
+                {todos.category.map((item,index)=>{
+                  return (
+                    <div key={index} className={style.dropdownItem}>
+                      <li><a onClick={() => navigate({
+                        pathname: '/category',
+                        search: `?name=${item}`
+                      })}>{item}</a></li>
+                      <br/>
+                    </div>
+                  );
+                })}
+              </ul>
+            </div>
           </button>
         </div>
       </div>
@@ -39,13 +67,13 @@ function Navbar() {
         <div className={style.menu}>
           {isAuthenticated ? (
             <>
-              <button className={style.userMenu}>
+              <button className={style.buttonHoverDropdown}>
                 <img src={user.picture} className={style.avt}/>
                 <div className={style.subMenu}>
                   <ul>
-                    <li><a href='#' onClick={() => navigate('/info')}>Information</a></li>
+                    <li><a onClick={() => navigate('/info')}>Information</a></li>
                     <br/>
-                    <li><a href='#' onClick={() => logout({ returnTo: window.location.origin })}>Logout</a></li>
+                    <li><a onClick={() => logout({ returnTo: window.location.origin })}>Logout</a></li>
                   </ul>
                 </div>
               </button>

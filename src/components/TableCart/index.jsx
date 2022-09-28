@@ -9,15 +9,22 @@ import style from './Tablecart.module.scss';
 
 export default function CustomizedTables(props) {
   const dispatch = useDispatch();
+
+  var formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    //minimumFractionDigits: 0, // (this suffices for whole numbers, but will print 2500.10 as $2,500.1)
+    //maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
+  });
   return (
     <TableContainer component={Paper}style={{ width: "90%" }}>
       <Table  >
         <TableHead>
           <TableRow>
             <TableCell>Product</TableCell>
-            <TableCell align="right">Unit Price</TableCell>
-            <TableCell align="right">Quantity</TableCell>
-            <TableCell align="right">Total Price</TableCell>
+            <TableCell align="center">Unit Price</TableCell>
+            <TableCell align="center">Quantity</TableCell>
+            <TableCell align="center">Total Price</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -26,8 +33,8 @@ export default function CustomizedTables(props) {
               <TableCell>
                 {item.title}
               </TableCell>
-              <TableCell align="right">{item.price}</TableCell>
-              <TableCell align="right">
+              <TableCell align="center">{formatter.format(item.price)}</TableCell>
+              <TableCell align="center">
                 <IconButton onClick={()=>dispatch(minusProduct(item.id))}>
                     <LeftOutlined   />
                 </IconButton>
@@ -36,7 +43,7 @@ export default function CustomizedTables(props) {
                     <RightOutlined   />
                 </IconButton>
               </TableCell>
-              <TableCell align="right">{item.number*item.price}</TableCell>
+              <TableCell align="center">{formatter.format(item.number*item.price)}</TableCell>
             </TableRow>
           ))}
         </TableBody>

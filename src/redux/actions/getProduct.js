@@ -7,19 +7,47 @@ export const getData = createAsyncThunk(
   // Code async logic, tham số đầu tiên data là dữ liệu truyền vào khi gọi action
   async (data, { rejectWithValue }) => {
     // Gọi lên API backend
-    const response = await fetch(
+    const responseProduct = await fetch(
       'https://fakestoreapi.com/products',
       {
         method: 'GET',
       }
     );
-    // Convert dữ liệu ra json
+    const jsonDataProduct = await responseProduct.json();
+    const responseCategory = await fetch(
+      'https://fakestoreapi.com/products/categories',
+      {
+        method: 'GET',
+      }
+    );
+    const jsonDataCategory = await responseCategory.json();
+    if (responseProduct.status < 200 || responseProduct.status >= 300) {
+      return rejectWithValue(jsonDataProduct);
+    }
+    if (responseCategory.status < 200 || responseCategory.status >= 300) {
+      return rejectWithValue(jsonDataCategory);
+    }
+    const jsonData ={product:jsonDataProduct,category:jsonDataCategory};
+    // Còn không thì trả về dữ liệu
+    return jsonData;
+  }
+);
+
+export const getDataByCategory = createAsyncThunk(
+  'data/getDataByCategory',
+
+  async (data, { rejectWithValue }) => {
+    const response = await fetch(
+      `https://fakestoreapi.com/products/category/${data}`,
+      {
+        method: 'GET',
+      }
+    );
     const jsonData = await response.json();
-    // Nếu bị lỗi thì reject
     if (response.status < 200 || response.status >= 300) {
       return rejectWithValue(jsonData);
     }
-    // Còn không thì trả về dữ liệu
+   
     return jsonData;
   }
 );
@@ -30,6 +58,8 @@ export const getProduct = createSlice({
     isLoading:false,
     errorMessage: '',
     data:[],
+    category:[],
+    filter:[]
   },
   reducers: {
   },
@@ -44,12 +74,26 @@ export const getProduct = createSlice({
     builder.addCase(getData.fulfilled, (state, action) => {
       // Tắt trạng thái loading, lưu thông tin user vào store
       state.isLoading = false;
-      state.data = action.payload;
+      state.data = action.payload.product;
+      state.category = action.payload.category;
     });
 
     // Khi thực hiện action thất bại (Promise rejected)
     builder.addCase(getData.rejected, (state, action) => {
       // Tắt trạng thái loading, lưu thông báo lỗi vào store
+      state.isLoading = false;
+      state.errorMessage = action.payload.message;
+    });
+
+    builder.addCase(getDataByCategory.pending, (state) => {
+      state.isLoading = true;
+    });
+    builder.addCase(getDataByCategory.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.filter = action.payload;
+    });
+
+    builder.addCase(getDataByCategory.rejected, (state, action) => {
       state.isLoading = false;
       state.errorMessage = action.payload.message;
     });
