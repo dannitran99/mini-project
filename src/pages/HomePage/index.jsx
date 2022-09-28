@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
-import { useDispatch,useSelector  } from 'react-redux';
-import { getData } from '../../redux/actions/getProduct';
+import {useSelector,useDispatch  } from 'react-redux';
 import { addToCart } from '../../redux/actions/createCart';
+import { useSearchParams } from 'react-router-dom';
+import { getDataByCategory } from '../../redux/actions/getProduct';
 import Loading from '../../components/Loading';
 import ProductItem from '../../components/ProductItem';
 import style from './Home.module.scss';
@@ -10,18 +11,22 @@ import {
 } from "@material-ui/core";
 
 function HomePage() {
-  
-  const todos = useSelector((state) => state.getProduct);
   const dispatch = useDispatch();
+  const todos = useSelector((state) => state.getProduct);
+  
+  let [searchParams, setSearchParams] = useSearchParams();
+  const param = searchParams.get('name')
+
+  const dataProduct= param? todos.filter:todos.data;
   useEffect(() => {
-    dispatch(getData())
-  }, []);
+    param && dispatch(getDataByCategory(param))
+  }, [param]);
 
   return (
        <div className={style.content}>
          {todos.isLoading && <Loading/>}
          <Grid container spacing={1}>
-           {todos.data.map((item,index)=>{
+           {dataProduct.map((item,index)=>{
             return (
               <Grid
                 key={index}

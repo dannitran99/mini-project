@@ -1,7 +1,6 @@
 .contentDetail{
-    position: absolute;
-    width: 100%;
-    top:100px;
+    margin-top: 70px;
+    width: inherit;
     padding: 2em;
  }
  .image{
@@ -13,8 +12,8 @@
  .priceDiv{
     display: flex;
     justify-content: space-between;
-    padding: 0 4em;
+    padding: 0 3em;
  }
  .detailProduct{
-    max-width: 600px;
+    max-width: 100%;
  }

@@ -8,42 +8,44 @@ function ProductItem(props) {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
+    const itemdata= props.data;
+
     const addToCart = () =>{
-        dispatch(props.addCart(props.data));
+        dispatch(props.addCart(itemdata));
     }
   return (
     <div className={style.itemComponent} >
         <div className={style.item}>
-            <img className={style.imgProduct} src={props.data.image}/>
+            <img className={style.imgProduct} src={itemdata.image}/>
             <div className={style.infodiv}>
-                <Typography>{props.data.title}</Typography>
+                <Typography>{itemdata.title}</Typography>
                 <hr/>
-                <Typography>{props.data.price}$</Typography>
+                <Typography>{itemdata.price}$</Typography>
             </div>
         </div>
         <Card sx={{ maxWidth: 345 }} className={style.cardItem}>
             <CardHeader
-                title={props.data.title}
-                subheader= {props.data.category}
+                title={itemdata.title}
+                subheader= {itemdata.category}
             />
             <CardMedia
                 component="img"
                 height="194"
-                image={props.data.image}
-                alt={props.data.title}
+                image={itemdata.image}
+                alt={itemdata.title}
                 onClick={()=>navigate({
                     pathname: '/detail-product',
-                    search: `?id=${props.data.id}`
+                    search: `?id=${itemdata.id}`
                   })}
                 style={{cursor:"pointer"}}
             />
             <CardContent>
                 <Typography variant="body2" >
-                {props.data.description}
+                {itemdata.description}
                 </Typography>
             </CardContent>
             <CardActions disableSpacing>
-                <Typography>{props.data.price}$</Typography>
+                <Typography>{itemdata.price}$</Typography>
                 <IconButton aria-label="Add to cart" onClick={addToCart}>
                     <PlusCircleOutlined   />
                 </IconButton>
