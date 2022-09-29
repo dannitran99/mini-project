@@ -11,6 +11,7 @@
   z-index: 999;
   top:0;
   .menu{
+    display: flex;
     height:100%;
   }
 }
@@ -37,22 +38,20 @@
     border: none;
     cursor: pointer;
 }
-
 .navsearch {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     background-color: #d5d73a;
     height:100%;
-    width: fit-content;
-    min-width: 80px;
+    width: 80px;
     padding:1em;
     border: none;
 }
 
 .textboxsearch{
-  // visibility: hidden;
-  display: none;
+  border-style:none solid none none;
+  border-width:thin;
+  border-color: #bfbfbf;
+  padding: 0 1em;
+  display: inline-block;
 }
 
 .navbutton {

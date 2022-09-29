@@ -62,6 +62,10 @@ export const getProduct = createSlice({
     filter:[]
   },
   reducers: {
+    searchData: (state, action) => {
+      var filterData = state.data.filter(element => element.title.toLowerCase().includes(action.payload.toLowerCase()));
+      state.filter = filterData;
+    },
   },
   extraReducers: (builder) => {
     // Bắt đầu thực hiện action (Promise pending)
@@ -101,7 +105,7 @@ export const getProduct = createSlice({
 });
 
 // this is for dispatch
-// export const { loadData } = getProduct.actions;
+export const { searchData } = getProduct.actions;
 
 // this is for configureStore
 export default getProduct.reducer;

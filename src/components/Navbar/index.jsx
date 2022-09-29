@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect,useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import {useSelector ,useDispatch } from 'react-redux';
 import {SearchOutlined,ShoppingCartOutlined } from '@ant-design/icons';
@@ -13,6 +13,8 @@ function Navbar() {
   const data = useSelector((state) => state.createCart);
   const todos = useSelector((state) => state.getProduct);
   const dispatch = useDispatch();
+
+  const [searchKeyword,setSearchKeyword] = useState('');
 
   useEffect(() => {
     dispatch(getData())
@@ -30,10 +32,23 @@ function Navbar() {
         <div className={style.menu}>
           <button className={style.navsearch}>
             <SearchOutlined/>
-            <div className={style.textboxsearch}>
-              <TextField label="Search..." />
-            </div>
           </button>
+          <div className={style.textboxsearch}>
+              <TextField 
+                label="Search..." 
+                value={searchKeyword} 
+                onChange={(event) =>setSearchKeyword(event.target.value)}
+                onKeyPress={(ev) => {
+                  if (ev.key === 'Enter') {
+                    searchKeyword && navigate({
+                      pathname: '/search',
+                      search: `?keyword=${searchKeyword}`
+                    })
+                    ev.preventDefault();
+                  }
+                }}
+              />
+          </div>
         </div>
         <div className={style.menu}>
           <button className={style.buttonHoverDropdown}>
