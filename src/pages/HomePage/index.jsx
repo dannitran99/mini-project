@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import {useSelector,useDispatch  } from 'react-redux';
 import { addToCart } from '../../redux/actions/createCart';
 import { useSearchParams } from 'react-router-dom';
-import { getDataByCategory } from '../../redux/actions/getProduct';
+import { getDataByCategory, searchData} from '../../redux/actions/getProduct';
 import Loading from '../../components/Loading';
 import ProductItem from '../../components/ProductItem';
 import style from './Home.module.scss';
@@ -15,12 +15,14 @@ function HomePage() {
   const todos = useSelector((state) => state.getProduct);
   
   let [searchParams, setSearchParams] = useSearchParams();
-  const param = searchParams.get('name')
+  const paramCategory = searchParams.get('name')
+  const paramSearch = searchParams.get('keyword')
 
-  const dataProduct= param? todos.filter:todos.data;
+  const dataProduct= paramCategory || paramSearch? todos.filter:todos.data;
   useEffect(() => {
-    param && dispatch(getDataByCategory(param))
-  }, [param]);
+    paramCategory && dispatch(getDataByCategory(paramCategory))
+    paramSearch  && dispatch(searchData(paramSearch))
+  }, [paramCategory,paramSearch]);
 
   return (
        <div className={style.content}>

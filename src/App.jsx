@@ -16,6 +16,7 @@ function App() {
         <Route exact path ="/info" element={<Info/>}/>
         <Route exact path ="/detail-product" element={<DetailProduct/>}/>
         <Route exact path ="/category" element={<HomePage/>}/>
+        <Route exact path ="/search" element={<HomePage/>}/>
       </Routes>
       <Footer/>
    </Router>
