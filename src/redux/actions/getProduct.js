@@ -66,6 +66,16 @@ export const getProduct = createSlice({
       var filterData = state.data.filter(element => element.title.toLowerCase().includes(action.payload.toLowerCase()));
       state.filter = filterData;
     },
+    sortData: (state, action) => {
+      var filterData = [];
+      action.payload==="asc"?filterData = state.data.sort((a,b)=>a.price-b.price):filterData = state.data.sort((a,b)=>b.price-a.price);
+      state.filter = filterData;
+    },
+    sortFilter: (state, action) => {
+      var filterData =[];
+      action.payload==="asc"?filterData = state.filter.sort((a,b)=>a.price-b.price):filterData = state.filter.sort((a,b)=>b.price-a.price);
+      state.filter = filterData;
+    },
   },
   extraReducers: (builder) => {
     // Bắt đầu thực hiện action (Promise pending)
@@ -105,7 +115,7 @@ export const getProduct = createSlice({
 });
 
 // this is for dispatch
-export const { searchData } = getProduct.actions;
+export const { searchData ,sortFilter,sortData} = getProduct.actions;
 
 // this is for configureStore
 export default getProduct.reducer;

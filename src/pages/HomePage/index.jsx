@@ -2,7 +2,7 @@ import React, { useEffect,useState } from 'react';
 import {useSelector,useDispatch  } from 'react-redux';
 import { addToCart } from '../../redux/actions/createCart';
 import { useSearchParams } from 'react-router-dom';
-import { getDataByCategory, searchData} from '../../redux/actions/getProduct';
+import { getDataByCategory, searchData, sortData, sortFilter} from '../../redux/actions/getProduct';
 import { useNavigate } from "react-router-dom";
 import Loading from '../../components/Loading';
 import ProductItem from '../../components/ProductItem';
@@ -24,9 +24,14 @@ function HomePage() {
   const dataProduct= paramCategory || paramSearch? todos.filter:todos.data;
   const [selectSort,setSelectSort] = useState('none');
   useEffect(() => {
-    paramCategory && dispatch(getDataByCategory(paramCategory))
-    paramSearch  && dispatch(searchData(paramSearch))
+    paramCategory && dispatch(getDataByCategory(paramCategory));
+    paramSearch  && dispatch(searchData(paramSearch));
+    return () => setSelectSort("none");
   }, [paramCategory,paramSearch]);
+
+  useEffect(() => {
+    !(!paramSort || paramSort =='none')&& (paramCategory || paramSearch ? dispatch(sortFilter(paramSort)):dispatch(sortData(paramSort)));
+  }, [paramSort]);
 
   const changeSelectSort =(e)=>{
     setSelectSort(e.target.value);
