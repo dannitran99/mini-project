@@ -1,10 +1,12 @@
-import React from 'react';
+import React,{useState} from 'react';
 import {Typography,Card,CardHeader,CardMedia,CardContent,CardActions,IconButton} from '@material-ui/core';
 import {PlusCircleOutlined } from '@ant-design/icons';
 import { useDispatch  } from 'react-redux';
 import { useNavigate } from "react-router-dom";
+import classNames from 'classnames';
 import style from './Productitem.module.scss';
 function ProductItem(props) {
+
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -13,9 +15,17 @@ function ProductItem(props) {
     const addToCart = () =>{
         dispatch(props.addCart(itemdata));
     }
+
+    const [isItemBottom, setIsItemBottom] = useState(false);
+
+    const calculatorHeight =()=>{
+        document.getElementById(`content`).clientHeight - document.getElementById(`product-item-${itemdata.title}`).offsetTop 
+            > document.getElementById(`card-${itemdata.title}`).clientHeight?
+            setIsItemBottom(false):setIsItemBottom(true);
+    }
   return (
-    <div className={style.itemComponent} >
-        <div className={style.item}>
+    <div className={style.itemComponent} id={`product-item-${itemdata.title}`} >
+        <div className={style.item} onMouseEnter={calculatorHeight}>
             <img className={style.imgProduct} src={itemdata.image}/>
             <div className={style.infodiv}>
                 <Typography>{itemdata.title}</Typography>
@@ -23,12 +33,13 @@ function ProductItem(props) {
                 <Typography>{itemdata.price}$</Typography>
             </div>
         </div>
-        <Card sx={{ maxWidth: 345 }} className={style.cardItem}>
+        <Card className={classNames(style.cardItem,{ [style.itemBottom]: isItemBottom })} id = {`card-${itemdata.title}`} >
             <CardHeader
                 title={itemdata.title}
                 subheader= {itemdata.category}
             />
             <CardMedia
+                
                 component="img"
                 height="194"
                 image={itemdata.image}
