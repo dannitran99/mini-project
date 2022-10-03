@@ -44,7 +44,7 @@ function HomePage() {
   }
 
   return (
-       <div className={style.content}>
+       <div className={style.content} id="content">
          {todos.isLoading && <Loading/>}
          <div className={style.sortPrice}>
            <Typography>Sort by price</Typography>

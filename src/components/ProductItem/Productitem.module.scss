@@ -15,6 +15,8 @@
          -o-animation: fadeIn 0.5s;
          -ms-animation: fadeIn 0.5s;  
           display:block;
+
+         
         }
       }
 }
@@ -40,12 +42,14 @@
 }
 
 .cardItem{
-    
     z-index: 1;
     position: absolute;
     display: none;
 }
 
+.itemBottom{
+  bottom:0%
+}
 
 @keyframes fadeIn {
     0% { opacity: 0; }
