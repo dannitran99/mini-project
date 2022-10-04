@@ -17,7 +17,6 @@ function DetailProduct() {
     }, []);
 
     const addCart = () =>{
-        console.log("here")
         dispatch(addToCart(itemProduct));
     }
  
