@@ -19,12 +19,12 @@ function ProductItem(props) {
     const [isItemBottom, setIsItemBottom] = useState(false);
 
     const calculatorHeight =()=>{
-        document.getElementById(`content`).clientHeight - document.getElementById(`product-item-${itemdata.title}`).offsetTop 
-            > document.getElementById(`card-${itemdata.title}`).clientHeight?
+        document.getElementById(`content`).clientHeight - document.getElementById(`product-item-${itemdata.id}`).offsetTop 
+            > document.getElementById(`card-${itemdata.id}`).clientHeight?
             setIsItemBottom(false):setIsItemBottom(true);
     }
   return (
-    <div className={style.itemComponent} id={`product-item-${itemdata.title}`} >
+    <div className={style.itemComponent} id={`product-item-${itemdata.id}`} >
         <div className={style.item} onMouseEnter={calculatorHeight}>
             <img className={style.imgProduct} src={itemdata.image}/>
             <div className={style.infodiv}>
@@ -33,7 +33,7 @@ function ProductItem(props) {
                 <Typography>{itemdata.price}$</Typography>
             </div>
         </div>
-        <Card className={classNames(style.cardItem,{ [style.itemBottom]: isItemBottom })} id = {`card-${itemdata.title}`} >
+        <Card className={classNames(style.cardItem,{ [style.itemBottom]: isItemBottom })} id = {`card-${itemdata.id}`} >
             <CardHeader
                 title={itemdata.title}
                 subheader= {itemdata.category}
